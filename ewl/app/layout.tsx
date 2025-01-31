@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <header>
-          <h1>Welcome to the EWL Demo Site</h1>
+          
         </header>
         <main>{children}</main>
         <footer>
