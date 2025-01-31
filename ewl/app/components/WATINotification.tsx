@@ -9,13 +9,18 @@ const WATINotification = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await axios.post('/api/wati', { phone, message });
-    alert('Notification sent!');
+    try {
+      const response = await axios.post('/api/wati', { phone, message });
+      alert(`Simulated response: ${response.data.message}`);
+    } catch (error) {
+      console.error('Error sending notification:', error);
+      alert('Failed to send notification. Please try again.');
+    }
   };
 
   return (
     <div>
-      <h2>Send WhatsApp Notification</h2>
+      <h2>Send WhatsApp Notification (Simulated)</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="tel"
