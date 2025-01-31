@@ -1,20 +1,27 @@
 "use client"; // Mark as a Client Component
 
-interface User {
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
+interface Score {
   name: string;
   score: number;
 }
 
-interface LeaderboardProps {
-  data: User[];
-}
+const Leaderboard = () => {
+  const [topScores, setTopScores] = useState<Score[]>([]);
 
-const Leaderboard: React.FC<LeaderboardProps> = ({ data }) => {
+  useEffect(() => {
+    axios.get<Score[]>('/api/leaderboard').then((response) => {
+      setTopScores(response.data);
+    });
+  }, []);
+
   return (
     <div>
       <h2>Leaderboard</h2>
       <ul>
-        {data.map((user, index) => (
+        {topScores.map((user, index) => (
           <li key={index}>
             {user.name}: {user.score}
           </li>
